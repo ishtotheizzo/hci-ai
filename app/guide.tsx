@@ -1,0 +1,57 @@
+"use client"; // 👈 Add this exact string at the very top
+
+import { Radio, RadioGroup } from "@headlessui/react";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
+
+const valueChosen = [{
+  type: "Seven Screen", 
+  number: 7, 
+  description: "This is "
+}]
+
+export default function Screen() {
+  const [selected, setSelected] = useState(plans[0]);
+
+  return (
+    <div className="w-full px-4">
+      <div className="mx-auto w-full max-w-md">
+        <RadioGroup
+          by="name"
+          value={selected}
+          onChange={setSelected}
+          aria-label="target-users"
+          className="space-y-2"
+        >
+          {plans.map((plan) => (
+            <Radio
+              key={plan.name}
+              value={plan}
+              className="group relative flex cursor-pointer rounded-lg bg-white/5 px-5 py-4 text-white shadow-md transition focus:not-data-focus:outline-none data-checked:bg-white/10 data-focus:outline data-focus:outline-white"
+            >
+              <div className="flex w-full items-center justify-between">
+                <div className="text-sm/6">
+                  <p className="font-semibold text-white">{plan.name}</p>
+                  <div className="flex gap-2 text-white/50">
+                    <div>{plan.description}</div>
+                  </div>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {plan.audience.map((aud) => (
+                      <span
+                        key={aud}
+                        className="rounded-full bg-white/10 px-2.5 py-0.5 text-xs font-medium text-white/80 ring-1 ring-inset ring-white/20"
+                      >
+                        {aud}
+                      </span>
+                    ))}
+                  </div>{" "}
+                </div>
+                <CheckCircleIcon className="size-6 fill-white opacity-0 transition group-data-checked:opacity-100" />
+              </div>
+            </Radio>
+          ))}
+        </RadioGroup>
+      </div>
+    </div>
+  );
+}
