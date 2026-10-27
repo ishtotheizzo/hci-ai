@@ -10,24 +10,11 @@ import {
   Input,
 } from "@headlessui/react";
 import { useSearchParams } from "next/navigation";
-import type { Plan, ScreenType } from "../data";
 
-function safeParse<T>(value: string | null): T | null {
-  try {
-    return value ? (JSON.parse(value) as T) : null;
-  } catch {
-    return null;
-  }
-}
+
 
 function GenerateForm() {
   const params = useSearchParams();
-  const plan = useMemo(() => safeParse<Plan>(params.get("audience")), [params]);
-  const screen = useMemo(
-    () => safeParse<ScreenType>(params.get("screen")),
-    [params],
-  );
-
   const [prompt, setPrompt] = useState("");
   const [html, setHtml] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,7 +24,7 @@ function GenerateForm() {
   const basePrompt = useMemo(() => {
     if (!plan || !screen) return "";
     return `${screen.additionToPrompt} for ${plan.name} users (${plan.audience.join(
-      ", ",
+      ", "
     )}). ${plan.description}`;
   }, [plan, screen]);
 
@@ -108,11 +95,7 @@ function GenerateForm() {
         </div>
       </div>
 
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        className="relative z-50"
-      >
+      <Dialog open={open} onClose={() => setOpen(false)} className="relative z-50">
         <DialogBackdrop
           transition
           className="fixed inset-0 bg-black/60 duration-200 ease-out data-closed:opacity-0"
