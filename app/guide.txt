@@ -1,4 +1,4 @@
-"use client"; // 👈 Add this exact string at the very top
+/*"use client"; // 👈 Add this exact string at the very top
 
 import { Radio, RadioGroup } from "@headlessui/react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
@@ -54,4 +54,4 @@ export default function Screen() {
       </div>
     </div>
   );
-}
+}*/
